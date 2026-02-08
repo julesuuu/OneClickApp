@@ -1,57 +1,40 @@
-import { useState } from 'react'
+import { useField } from '../hooks/index'
+import { useDispatch } from 'react-redux'
+import { createNewUser } from '../reducers/userReducer'
 
-const RegisterForm = ({ createUser }) => {
-  const [username, setUsername] = useState('')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const RegisterForm = ({ notify }) => {
+  const dispatch = useDispatch()
 
-  const handleSubmit = (event) => {
+  const { reset: resetName, ...name } = useField('text')
+  const { reset: resetUsername, ...username } = useField('text')
+  const { reset: resetPassword, ...password } = useField('password')
+  const { reset: resetEmail, ...email } = useField('email')
+
+  const handleRegister = async (event) => {
     event.preventDefault()
-    createUser({ username, name, email, password })
+    try {
+      await dispatch(createNewUser({
+        username: username.value,
+        name: name.value,
+        email: email.value,
+        password: password.value
+      }))
+      notify(`Successfully registered ${username.value}`)
 
-    setUsername('')
-    setName('')
-    setEmail('')
-    setPassword('')
+      resetName(); resetUsername(); resetPassword(); resetEmail();
+    } catch (error) {
+      notify(`Error: ${error.respose?.data?.error || 'Failed to register'}`)
+    }
   }
 
   return (
-    <div className='form-container'>
+    <div className='register-box'>
       <h3>Create Account</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          name <input
-            type="text"
-            value={name}
-            onChange={({ target }) => setName(target.value)}
-            required
-          />
-        </div>
-        <div>
-          username <input
-            type="text"
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
-            required
-          />
-        </div>
-        <div>
-          password <input
-            type="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-            required
-          />
-        </div>
-        <div>
-          email <input
-            type="email"
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-            required
-          />
-        </div>
+      <form onSubmit={handleRegister}>
+        <div>name <input {...name} required /></div>
+        <div>username <input {...username} required /></div>
+        <div>password <input {...password} required /></div>
+        <div>email <input {...email} required /></div>
         <button type='submit'>create account</button>
       </form>
     </div>
