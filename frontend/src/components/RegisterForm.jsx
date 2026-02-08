@@ -33,7 +33,7 @@ const RegisterForm = ({ notify }) => {
       <form onSubmit={handleRegister}>
         <div>name <input {...name} required /></div>
         <div>username <input {...username} required /></div>
-        <div>password <input {...password} required /></div>
+        <div>password <input {...password} minLength={8} required /></div>
         <div>email <input {...email} required /></div>
         <button type='submit'>create account</button>
       </form>

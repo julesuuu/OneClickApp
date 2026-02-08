@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RegisterForm from './components/RegisterForm'
+import LoginForm from './components/LoginForm'
 
 function App() {
   const [notification, setNotification] = useState(null)
@@ -14,6 +15,7 @@ function App() {
       <h1>OneClick App</h1>
       {notification && <div className='toast'>{notification}</div>}
       <RegisterForm notify={notify} />
+      <LoginForm notify={notify} />
     </div>
   )
 }
