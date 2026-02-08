@@ -1,34 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import RegisterForm from './components/RegisterForm'
+import userService from './services/userService'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [message, setMessage] = useState(null)
+
+  const addUser = async (userObject) => {
+    try {
+      const returnedUser = await userService.create(userObject)
+      setMessage(`User ${returnedUser.username} created successfully`)
+      setTimeout(() => setMessage(null), 5000)
+    }
+    catch (error) {
+      const errorMsg = error.respose?.data?.error || 'Could not create user'
+      setMessage(`Error ${errorMsg}`)
+      setTimeout(() => setMessage(null), 5000)
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='container'>
+      <h1>OneClick App</h1>
+      {message && <div className='notification'>{message}</div>}
+      <RegisterForm createUser={addUser} />
+    </div>
   )
 }
 
