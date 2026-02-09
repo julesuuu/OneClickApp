@@ -14,11 +14,11 @@ const LoginForm = ({ notify }) => {
     try {
       await dispatch(login({
         username: username.value,
-        pasword: password.value
+        password: password.value
       }))
       resetUsername(); resetPassword();
     } catch (error) {
-      notify(`Error: ${error.respose?.data?.error || 'Wrong credentials'}`)
+      notify(`Error: ${error.response?.data?.error || 'Wrong credentials'}`)
     }
   }
 

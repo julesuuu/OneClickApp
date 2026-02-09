@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import loginService from '../services/login'
+import loginService from '../services/loginService'
 import userService from '../services/userService'
 
-const authSlice = new createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: null,
   reducers: {
-    setUser(state, aciton) {
-      return aciton.payload
+    setUser(state, action) {
+      return action.payload
     },
     clearUser() {
       return null
@@ -23,6 +23,14 @@ export const login = (credentials) => {
     window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
     userService.setToken(user.token)
     dispatch(setUser(user))
+  }
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+    window.localStorage.removeItem('loggedAppUser')
+    userService.setToken(null)
+    dispatch(clearUser())
   }
 }
 

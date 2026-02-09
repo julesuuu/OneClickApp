@@ -23,7 +23,7 @@ const RegisterForm = ({ notify }) => {
 
       resetName(); resetUsername(); resetPassword(); resetEmail();
     } catch (error) {
-      notify(`Error: ${error.respose?.data?.error || 'Failed to register'}`)
+      notify(`Error: ${error.response?.data?.error || 'Failed to register'}`)
     }
   }
 
