@@ -5,21 +5,65 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 3
-  },
-  name: {
-    type: String,
-    required: true,
-    minlength: 3
+    minlength: 3,
+    trim: true
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true
   },
   passwordHash: {
     type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    minlength: 2,
+    trim: true
+  },
+  birthdate: {
+    type: Date,
+    required: true
+  },
+  gender: {
+    type: String,
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  lrn: {
+    type: String,
+    unique: true,
+    sparse: true,
+    trim: true
+  },
+  studentNumber: {
+    type: String,
+    unique: true,
+    sparse: true,
+    trim: true
+  },
+  course: {
+    type: String,
+    required: true,
+    enum: ['BSIT', 'BSBA', 'BSCrim', 'BSHM', 'BSE']
+  },
+  yearLevel: {
+    type: String,
+    required: true,
+    enum: [
+      '1st Year',
+      '2nd Year',
+      '3rd Year',
+      '4th Year',
+      'Graduating',
+      'Graduate'
+    ]
   },
   role: {
     type: String,
@@ -27,6 +71,10 @@ const userSchema = new mongoose.Schema({
     default: 'student'
   },
   isValidated: {
+    type: Boolean,
+    default: false
+  },
+  profileCompleted: {
     type: Boolean,
     default: false
   },
@@ -54,6 +102,11 @@ userSchema.set('toJSON', {
     delete returnedObject.passwordHash
   }
 })
+
+userSchema.index({ email: 1 })
+userSchema.index({ username: 1 })
+userSchema.index({ studentNumber: 1 })
+userSchema.index({ lrn: 1 })
 
 const User = mongoose.model('User', userSchema)
 
