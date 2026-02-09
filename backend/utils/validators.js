@@ -10,9 +10,8 @@ const step1Schema = z.object({
     .trim(),
   password: z.string()
     .min(8, { message: 'Password must be at least 8 characters' })
-    .regex(/[A-Z]/, { message: 'Password must contatin at least one uppercase letter' }
-    .regex(/[0-9]/, {message: 'Password must contain at least one number'})
-  )
+    .regex(/[A-Z]/, { message: 'Password must contatin at least one uppercase letter' })
+    .regex(/[0-9]/, { message: 'Password must contain at least one number'})
 }).strict()
 
 const step2Schema = z.object({
@@ -32,7 +31,7 @@ const step2Schema = z.object({
   .transform((val) => val.replace(/[\s-]/g, ''))
   .pipe(
     z.string().regex(
-      /^(09|\+63(9)?)\d{9}$/,
+      /^(09|\+639)\d{9}$/,
       { message: "Invalid PH mobile number. Must start with 09 or +639." }
     ))
 }).strict()

@@ -21,20 +21,14 @@ const userSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
     minlength: 2,
     trim: true
   },
   birthdate: {
     type: Date,
-    required: true
-  },
-  gender: {
-    type: String,
   },
   phone: {
     type: String,
-    required: true
   },
   lrn: {
     type: String,
@@ -50,12 +44,10 @@ const userSchema = new mongoose.Schema({
   },
   course: {
     type: String,
-    required: true,
     enum: ['BSIT', 'BSBA', 'BSCrim', 'BSHM', 'BSE']
   },
   yearLevel: {
     type: String,
-    required: true,
     enum: [
       '1st Year',
       '2nd Year',
@@ -102,11 +94,6 @@ userSchema.set('toJSON', {
     delete returnedObject.passwordHash
   }
 })
-
-userSchema.index({ email: 1 })
-userSchema.index({ username: 1 })
-userSchema.index({ studentNumber: 1 })
-userSchema.index({ lrn: 1 })
 
 const User = mongoose.model('User', userSchema)
 
