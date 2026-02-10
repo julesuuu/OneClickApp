@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import loginService from '../services/loginService'
 import userService from '../services/userService'
+import { setNotification } from './notificationReducer'
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: null,
+  initialState: {
+    token: null,
+    user: null
+  },
   reducers: {
     setUser(state, action) {
       return action.payload
@@ -31,6 +35,29 @@ export const logout = () => {
     window.localStorage.removeItem('loggedAppUser')
     userService.setToken(null)
     dispatch(clearUser())
+  }
+}
+
+export const updateProfile = (profileData) => {
+  return async (dispatch, getState) => {
+    try {
+      const { auth } = getState()
+      
+      const updatedUser = await userService.patchMe(profileData)
+
+      const userToSave = { ...updatedUser, token: auth.token }
+
+      dispatch(setUser(userToSave))
+
+      window.localStorage.setItem('loggedAppUser', JSON.stringify(userToSave))
+
+      return updatedUser
+
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || 'Failed to update profile'
+      dispatch(setNotification(errorMessage))
+      throw error
+    }
   }
 }
 

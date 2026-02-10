@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux'
 import { useField } from '../hooks'
 import { login } from '../reducers/authReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
-const LoginForm = ({ notify }) => {
+const LoginForm = () => {
   const dispatch = useDispatch()
 
   const { reset: resetUsername, ...username } = useField('text')
@@ -18,7 +19,7 @@ const LoginForm = ({ notify }) => {
       }))
       resetUsername(); resetPassword();
     } catch (error) {
-      notify(`Error: ${error.response?.data?.error || 'Wrong credentials'}`)
+      dispatch(setNotification(error.errors[0].message))
     }
   }
 

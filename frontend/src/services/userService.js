@@ -20,4 +20,13 @@ const create = async (newObject) => {
   return response.data
 }
 
-export default { getAll, create, setToken } 
+const patchMe = async (newObject) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const response = await axios.patch(`${baseUrl}/me`, newObject, config)
+  return response.data
+}
+
+export default { getAll, create, setToken, patchMe } 
