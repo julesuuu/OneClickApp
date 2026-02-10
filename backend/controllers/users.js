@@ -4,7 +4,7 @@ const { userExtractor } = require('../utils/middleware')
 
 usersRouter.post('/sync', async (req, res) => {
 
-  const { userId, sessionClaims } = req.auth
+  const { userId, sessionClaims } = req.auth()
 
   if (!userId) return res.status(401).json({ error: 'No clerk session found' })
   

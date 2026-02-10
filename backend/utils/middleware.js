@@ -1,7 +1,8 @@
 const User = require('../models/User')
 
 const userExtractor = async (req, res, next) => {
-  const clerkId = req.auth.userId
+  const auth = req.auth()
+  const clerkId = auth.userId
 
   if (!clerkId) {
     return res.status(401).json({ error: 'Unauthorized: No session found' })

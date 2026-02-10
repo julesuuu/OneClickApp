@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
+import Step2 from './components/onboarding/Step2'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -43,8 +44,7 @@ function App() {
         <main>
           {!profile?.profileCompleted ? (
             <section className="onboarding-flow">
-              <h2>Step 2: Personal Information</h2>
-              <p>Almost there! We just need a few more details to set up your student record.</p>
+              <Step2 />
 
               <button className="btn-next">Start Profile Setup</button>
             </section>
