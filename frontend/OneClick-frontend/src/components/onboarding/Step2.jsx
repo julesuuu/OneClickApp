@@ -12,7 +12,7 @@ const Step2 = () => {
   const name = useField('text')
   const phone = useField('tel')
   const birthdate = useField('date')
-  const gender = useField('select')
+  const gender = useField('select', 'male')
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -3,6 +3,7 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } 
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import Step2 from './components/onboarding/Step2'
+import Step3 from './components/onboarding/Step3'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -28,7 +29,7 @@ function App() {
     <div className="container">
       <SignedOut>
         <div className="landing">
-          <h1>OneClick Enrollment System</h1>
+          <h1>OneClick App</h1>
           <p>Login with your school email to begin.</p>
           <SignInButton mode="modal" className="btn-primary" />
           <SignUpButton />
@@ -43,17 +44,9 @@ function App() {
 
         <main>
           {!profile?.profileCompleted ? (
-            <section className="onboarding-flow">
-              <Step2 />
-
-              <button className="btn-next">Start Profile Setup</button>
-            </section>
+            !profile?.name ? <Step2 /> : <Step3 />
           ) : (
-            <section className="dashboard">
-              <h2>Student Dashboard</h2>
-              <p>Status: {profile.isValidated ? "✅ Validated" : "⏳ Pending Validation"}</p>
-
-            </section>
+            <Dashboard />
           )}
         </main>
       </SignedIn>
