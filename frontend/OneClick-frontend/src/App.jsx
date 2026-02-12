@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import Step2 from './components/onboarding/Step2'
@@ -26,7 +26,7 @@ function App() {
     return <div className='loading-screen'>Verifiying Student Profile...</div>
   }
   return (
-    <div className="container">
+    <div className="flex items-center justify-center w-full">
       <SignedOut>
         <div className="landing">
           <h1>OneClick App</h1>
@@ -37,11 +37,6 @@ function App() {
       </SignedOut>
 
       <SignedIn>
-        <nav>
-          <p>Welcome, {user?.firstName}!</p>
-          <UserButton afterSignOutUrl="/" />
-        </nav>
-
         <main>
           {!profile?.profileCompleted ? (
             !profile?.name ? <Step2 /> : <Step3 />
