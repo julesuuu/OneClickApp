@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import Step2 from './components/onboarding/Step2'
 import Step3 from './components/onboarding/Step3'
+import Dashboard from './components/Dashboard'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -37,6 +38,7 @@ function App() {
       </SignedOut>
 
       <SignedIn>
+        <SignOutButton />
         <main>
           {!profile?.profileCompleted ? (
             !profile?.name ? <Step2 /> : <Step3 />
