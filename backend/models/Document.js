@@ -76,6 +76,14 @@ const documentSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
+documentSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
 documentSchema.index({ user: 1, status: 1, createdAt: -1 })
 
 const Document = mongoose.model('Document', documentSchema)

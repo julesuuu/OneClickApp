@@ -63,6 +63,14 @@ const paymentSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
+paymentSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
 paymentSchema.index({ user: 1, status: 1 })
 paymentSchema.index({ request: 1, createdAt: -1 })
 paymentSchema.index({ status: 1, createdAt: -1 })
