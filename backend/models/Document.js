@@ -29,13 +29,14 @@ const documentSchema = new mongoose.Schema({
       'Further Studies / Graduate School',
       'Transfer to another school',
       'Visa / Immigration',
-      'Personal User',
+      'Personal Use',
       'Other'
     ]
   },
   customPurpose: {
     type: String,
     trim: true,
+    sparse: true,
     default: null
   },
   copies: {
@@ -49,6 +50,7 @@ const documentSchema = new mongoose.Schema({
     type: String,
     enum: [
       'Pending',
+      'Payment Pending',
       'Processing',
       'Ready for Pickup',
       'Completed',
@@ -73,6 +75,8 @@ const documentSchema = new mongoose.Schema({
     default: null
   }
 }, { timestamps: true })
+
+documentSchema.index({ user: 1, status: 1, createdAt: -1 })
 
 const Document = mongoose.model('Document', documentSchema)
 
