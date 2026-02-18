@@ -1,7 +1,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { UserButton } from '@clerk/clerk-react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Logo } from '../ui/icons'
+import { Logo } from './icons'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
