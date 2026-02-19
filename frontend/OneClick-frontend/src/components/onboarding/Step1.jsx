@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../ui/card'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -13,32 +13,35 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-      <Card className="w-full max-w-lg border border-gray-200 shadow-xl rounded-2xl overflow-hidden">
+    <div className="min-h-screen bg-slate-50/50 pt-24 pb-12 px-4 font-mono">
+      <Card className="max-w-md mx-auto border-none shadow-xl shadow-slate-200/50 rounded-2xl">
         {/* Header */}
-        <CardHeader className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white pb-8 pt-10 px-8">
-          <div className="flex items-center justify-between mb-4">
-            <CardTitle className="text-3xl font-bold">Personal Information</CardTitle>
-            <span className="text-sm font-medium opacity-90">Step 1 of 3</span>
+        <CardHeader className="space-y-1 pb-6">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600 uppercase">Personal Information</CardTitle>
+            <span className="text-xs font-bold px-2 py-1 bg-indigo-50 text-indigo-600 rounded-full">
+              Step 1/3
+            </span>
           </div>
-          <CardDescription className="text-indigo-100 text-lg">
+          <CardDescription className="text-slate-500 font-sans">
             Let's start with some basic details about you.
           </CardDescription>
 
-          <Progress value={33} className="mt-8 h-2 bg-indigo-800/50" indicatorClassName="bg-white" />
+          <Progress value={33} className="mt-8 h-2 bg-indigo-800/50" indicatorclassname="bg-white" />
         </CardHeader>
 
-        <CardContent className="p-8 space-y-8">
-          <form onSubmit={handleContinue} className="space-y-6">
+        <CardContent>
+          <form id="step1-form" onSubmit={handleContinue} className="space-y-6">
+
             {/* Full Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-base font-medium text-gray-700">
+              <Label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-slate-400">
                 Full Name
               </Label>
               <Input
                 id="name"
                 placeholder="Juan Dela Cruz"
-                className="h-12 text-base focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:border-indigo-500 transition-all"
+                className="h-11 rounded-xl border-slate-200 focus:ring-indigo-500"
                 required
                 {...name.attributes}
               />
@@ -46,14 +49,14 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
 
             {/* Phone Number */}
             <div className="space-y-2">
-              <Label htmlFor="phone" className="text-base font-medium text-gray-700">
+              <Label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-slate-400">
                 Phone Number
               </Label>
               <Input
                 id="phone"
                 type="tel"
                 placeholder="0912 345 6789"
-                className="h-12 text-base focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:border-indigo-500 transition-all"
+                className="h-11 rounded-xl border-slate-200 focus:ring-indigo-500"
                 required
                 {...phone.attributes}
               />
@@ -63,13 +66,13 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Birthdate */}
               <div className="space-y-2">
-                <Label htmlFor="birthdate" className="text-base font-medium text-gray-700">
+                <Label htmlFor="birthdate" className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Birthdate
                 </Label>
                 <Input
                   id="birthdate"
                   type="date"
-                  className="h-12 text-base focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:border-indigo-500 transition-all"
+                  className="h-11 rounded-xl border-slate-200 focus:ring-indigo-500"
                   required
                   {...birthdate.attributes}
                 />
@@ -77,17 +80,17 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
 
               {/* Gender */}
               <div className="space-y-2">
-                <Label htmlFor="gender" className="text-base font-medium text-gray-700">
+                <Label htmlFor="gender" className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Gender
                 </Label>
                 <Select
-                  value={gender.attributes.value}
                   onValueChange={(val) => gender.attributes.onChange({ target: { value: val } })}
+                  defaultValue={gender.attributes.value}
                 >
-                  <SelectTrigger className="h-12 text-base">
+                  <SelectTrigger className="h-11 rounded-xl border-slate-200">
                     <SelectValue placeholder="Select gender" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-xl">
                     <SelectItem value="male">Male</SelectItem>
                     <SelectItem value="female">Female</SelectItem>
                     <SelectItem value="other">Other</SelectItem>
@@ -95,18 +98,19 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
                 </Select>
               </div>
             </div>
-
-            {/* Submit */}
-            <div className="pt-6">
-              <Button
-                type="submit"
-                className="w-full h-12 text-base font-medium bg-indigo-600 hover:bg-indigo-700 transition-all active:scale-[0.98]"
-              >
-                Save & Continue to Student Info
-              </Button>
-            </div>
           </form>
         </CardContent>
+
+        <CardFooter className="flex gap-3 pb-8 px-6">
+          {/* Submit */}
+          <Button
+            type="submit"
+            form="step1-form"
+            className="flex-1 h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transition-all active:scale-95"
+          >
+            Save & Continue
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   )
