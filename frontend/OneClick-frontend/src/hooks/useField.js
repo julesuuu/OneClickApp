@@ -10,15 +10,15 @@ const useField = (type, initialValue = '') => {
   const reset = () => {
     setValue('')
   }
-  
+
   return {
     attributes: {
       type,
       value,
-      onChange
+      onChange,
     },
     reset,
-    value 
+    value,
   }
 }
 

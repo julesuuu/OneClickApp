@@ -6,7 +6,7 @@ export const syncUserWithBackend = createAsyncThunk(
   async ({ email, username }, { rejectWithValue }) => {
     try {
       const token = await window.Clerk.session.getToken()
-      
+
       const response = await axios.post(
         'http://localhost:3001/api/users/sync',
         { email, username },
@@ -29,7 +29,7 @@ const userSlice = createSlice({
   reducers: {
     clearUser: (state) => {
       state.profile = null
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,7 +44,7 @@ const userSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-  }
+  },
 })
 
 export const { clearUser } = userSlice.actions

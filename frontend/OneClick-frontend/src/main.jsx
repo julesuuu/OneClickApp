@@ -19,5 +19,5 @@ createRoot(document.getElementById('root')).render(
         <App />
       </Provider>
     </ClerkProvider>
-  </StrictMode>,
+  </StrictMode>
 )

@@ -15,19 +15,13 @@ const Onboarding = () => {
   const course = useField('text')
   const yearLevel = useField('text')
 
-  const nextStep = () => setCurrentStep(prev => prev + 1)
-  const prevStep = () => setCurrentStep(prev => prev - 1)
+  const nextStep = () => setCurrentStep((prev) => prev + 1)
+  const prevStep = () => setCurrentStep((prev) => prev - 1)
 
   return (
     <div>
       {currentStep === 1 && (
-        <Step1
-          name={name}
-          phone={phone}
-          birthdate={birthdate}
-          gender={gender}
-          onNext={nextStep}
-        />
+        <Step1 name={name} phone={phone} birthdate={birthdate} gender={gender} onNext={nextStep} />
       )}
       {currentStep === 2 && (
         <Step2

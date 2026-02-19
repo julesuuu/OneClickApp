@@ -1,5 +1,13 @@
 import { useEffect } from 'react'
-import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react'
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+  useUser,
+} from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import NavBar from './components/ui/NavBar'
@@ -13,17 +21,19 @@ function App() {
 
   useEffect(() => {
     if (isSignedIn && user) {
-      dispatch(syncUserWithBackend({
-        email: user.primaryEmailAddress.emailAddress,
-        username: user.username || user.firstName
-      }))
+      dispatch(
+        syncUserWithBackend({
+          email: user.primaryEmailAddress.emailAddress,
+          username: user.username || user.firstName,
+        })
+      )
     } else if (!isSignedIn) {
       dispatch(clearUser())
     }
   }, [isSignedIn, user, dispatch])
 
   if (!isLoaded || (isSignedIn && loading)) {
-    return <div className='loading-screen'>Verifiying Student Profile...</div>
+    return <div className="loading-screen">Verifiying Student Profile...</div>
   }
   return (
     <div>

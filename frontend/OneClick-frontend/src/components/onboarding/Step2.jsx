@@ -12,29 +12,35 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 pt-24 pb-12 px-4 font-mono">
-      <Card className="max-w-md mx-auto border-none shadow-xl shadow-slate-200/50 rounded-2xl">
+    <div className="min-h-screen bg-slate-50/50 px-4 pb-12 pt-24 font-mono">
+      <Card className="mx-auto max-w-md rounded-2xl border-none shadow-xl shadow-slate-200/50">
         <CardHeader className="space-y-1 pb-6">
-          <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600 uppercase">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl font-black uppercase tracking-tighter text-indigo-600">
               Student Information
             </CardTitle>
-            <span className="text-xs font-bold px-2 py-1 bg-indigo-50 text-indigo-600 rounded-full">
+            <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600">
               Step 2/3
             </span>
           </div>
-          <CardDescription className="text-slate-500 font-sans">
+          <CardDescription className="font-sans text-slate-500">
             Now, your student info.
           </CardDescription>
-          <Progress value={66} className="mt-8 h-2 bg-indigo-800/50" indicatorclassname="bg-white" />
+          <Progress
+            value={66}
+            className="mt-8 h-2 bg-indigo-800/50"
+            indicatorclassname="bg-white"
+          />
         </CardHeader>
 
         <CardContent>
           <form id="step2-form" onSubmit={handleContinue} className="space-y-6">
-
             {/* LRN */}
             <div className="space-y-2">
-              <Label htmlFor="lrn" className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <Label
+                htmlFor="lrn"
+                className="text-xs font-bold uppercase tracking-wider text-slate-400"
+              >
                 LRN (Learner Reference Number)
               </Label>
               <Input
@@ -48,7 +54,10 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
 
             {/* Student ID */}
             <div className="space-y-2">
-              <Label htmlFor="studentId" className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <Label
+                htmlFor="studentId"
+                className="text-xs font-bold uppercase tracking-wider text-slate-400"
+              >
                 Student ID Number
               </Label>
               <Input
@@ -63,7 +72,12 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
             {/* Course */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="course" className="text-xs font-bold uppercase tracking-wider text-slate-400">Course</Label>
+                <Label
+                  htmlFor="course"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-400"
+                >
+                  Course
+                </Label>
                 <Select
                   onValueChange={(val) => course.attributes.onChange({ target: { value: val } })}
                   defaultValue={course.attributes.value}
@@ -83,7 +97,12 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
 
               {/* Year */}
               <div className="space-y-2">
-                <Label htmlFor="year" className="text-xs font-bold uppercase tracking-wider text-slate-400">Year Level</Label>
+                <Label
+                  htmlFor="year"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-400"
+                >
+                  Year Level
+                </Label>
                 <Select
                   onValueChange={(val) => yearLevel.attributes.onChange({ target: { value: val } })}
                   defaultValue={yearLevel.attributes.value}
@@ -103,12 +122,12 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
           </form>
         </CardContent>
 
-        <CardFooter className="flex gap-3 pb-8 px-6">
+        <CardFooter className="flex gap-3 px-6 pb-8">
           {/* Back */}
           <Button
             variant="outline"
             onClick={onBack}
-            className="flex-1 h-12 rounded-xl border-slate-200 font-bold text-slate-500"
+            className="h-12 flex-1 rounded-xl border-slate-200 font-bold text-slate-500"
           >
             Back
           </Button>
@@ -116,7 +135,7 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
           <Button
             type="submit"
             form="step2-form"
-            className="flex-1 h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transition-all active:scale-95"
+            className="h-12 flex-1 rounded-xl bg-indigo-600 font-bold text-white shadow-lg shadow-indigo-100 transition-all hover:bg-indigo-700 active:scale-95"
           >
             Review Details
           </Button>
