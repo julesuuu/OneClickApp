@@ -16,7 +16,7 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
       <Card className="mx-auto max-w-md rounded-2xl border-none shadow-xl shadow-slate-200/50">
         <CardHeader className="space-y-1 pb-6">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-black uppercase tracking-tighter text-indigo-600">
+            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600">
               Student Information
             </CardTitle>
             <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600 text-center">

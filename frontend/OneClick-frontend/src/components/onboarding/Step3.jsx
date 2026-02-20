@@ -10,7 +10,7 @@ const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
       <Card className='max-w-md mx-auto border-none shadow-xl shadow-slate-200/50 rounded-2xl'>
         <CardHeader className='space-y-1 pb-6 rounded-t-2xl'>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-black uppercase tracking-tighter text-indigo-600">
+            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600">
               Review Information
             </CardTitle>
             <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600 text-center">
@@ -34,15 +34,15 @@ const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
               Personal Info
             </h4>
             <div className='grid grid-cols-2 gap-y-2 text-sm font-sans space-between'>
-              <span className='text-gray-500'>Name</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Name</span>
               <span className='text-right font-bold'>{formData.name}</span>
-              <span className='text-gray-500'>Phone Number</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Phone Number</span>
               <span className='text-right font-bold'>{formData.phone}</span>
-              <span className='text-gray-500'>Gender</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Gender</span>
               <span className='text-right font-bold capitalize'>
                 {formData.gender}
               </span>
-              <span className='text-gray-500'>Birthday</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Birthday</span>
               <span className='text-right font-bold'>{formData.birthdate}</span>
             </div>
           </div>
@@ -55,11 +55,11 @@ const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
               Academic Info
             </h4>
             <div className='grid grid-cols-2 gap-y-2 text-sm font-sans'>
-              <span className='text-gray-500'>LRN</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>LRN</span>
               <span className='text-right font-bold'>{formData.lrn}</span>
-              <span className='text-gray-500'>Course</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Course</span>
               <span className='text-right font-bold'>{formData.course}</span>
-              <span className='text-gray-500'>Year</span>
+              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Year</span>
               <span className='text-right font-bold'>{formData.yearLevel}</span>
             </div>
           </div>

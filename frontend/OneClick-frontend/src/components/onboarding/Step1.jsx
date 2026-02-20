@@ -17,7 +17,7 @@ const Step1 = ({ name, phone, birthdate, gender, onNext }) => {
         {/* Header */}
         <CardHeader className="space-y-1 pb-6">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-black uppercase tracking-tighter text-indigo-600">
+            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600">
               Personal Information
             </CardTitle>
             <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600 text-center">
