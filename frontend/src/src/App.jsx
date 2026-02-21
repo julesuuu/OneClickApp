@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import NavBar from './components/ui/NavBar'
 import Parent from './components/onboarding/Parent'
+import Landing from './components/Pages/Landing'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -39,14 +40,14 @@ function App() {
     <div>
       <SignedOut>
         <div className="landing">
-          <h1>OneClick App</h1>
-          <p>Login with your school email to begin.</p>
+          <Landing />
           <SignInButton mode="modal" className="btn-primary" />
           <SignUpButton />
         </div>
       </SignedOut>
 
       <SignedIn>
+        <SignOutButton />
         <main>
           <Parent />
         </main>
