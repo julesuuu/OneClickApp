@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import {
   Table,
   TableBody,
@@ -99,9 +100,10 @@ export default function Landing() {
               <FileText className="h-8 w-8 text-primary" />
               <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-teal-500" />
             </div>
-            <span className="text-xl font-bold">OneClick Credentials</span>
+            <span className="text-xl font-bold text-foreground">OneClick Credentials</span>
           </div>
-          <nav className="flex items-center gap-4">
+          <nav className="flex items-center gap-2">
+            <ThemeToggle />
             {isSignedIn ? (
               <Button variant="ghost" onClick={handleGetStarted}>
                 Dashboard
@@ -109,7 +111,7 @@ export default function Landing() {
             ) : (
               <>
                 <SignInButton mode="modal">
-                  <Button variant="ghost">Log In</Button>
+                  <Button variant="ghost" className="text-foreground">Log In</Button>
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <Button>Sign Up Free</Button>
@@ -156,7 +158,7 @@ export default function Landing() {
       {/* Features Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Why Choose OneClick Credentials?</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Why Choose OneClick Credentials?</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             We make requesting your academic documents simple, fast, and hassle-free
           </p>
@@ -165,7 +167,7 @@ export default function Landing() {
               <Card key={index} className="border-2 hover:border-primary/50 transition-colors">
                 <CardHeader>
                   <div className="mb-2">{feature.icon}</div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl text-foreground">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">{feature.description}</p>
@@ -179,7 +181,7 @@ export default function Landing() {
       {/* Supported Documents */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Available Documents</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Available Documents</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             We offer a wide range of academic credentials to meet your needs
           </p>
@@ -188,7 +190,7 @@ export default function Landing() {
               <Card key={index} className="bg-muted/50">
                 <CardContent className="flex items-center gap-3 p-4">
                   <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                  <span className="font-medium">{doc}</span>
+                  <span className="font-medium text-foreground">{doc}</span>
                 </CardContent>
               </Card>
             ))}
@@ -199,7 +201,7 @@ export default function Landing() {
       {/* Pricing Table */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Transparent Pricing</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Transparent Pricing</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             No hidden fees. Simple and transparent pricing for all documents
           </p>
@@ -214,8 +216,8 @@ export default function Landing() {
               <TableBody>
                 {pricing.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-medium">{item.name}</TableCell>
-                    <TableCell className="text-right font-mono">₱{item.price}</TableCell>
+                    <TableCell className="font-medium text-foreground">{item.name}</TableCell>
+                    <TableCell className="text-right font-mono text-foreground">₱{item.price}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -230,15 +232,15 @@ export default function Landing() {
       {/* FAQ Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Frequently Asked Questions</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Got questions? We have answers.
           </p>
           <Accordion type="single" collapsible className="max-w-2xl mx-auto">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+                <AccordionTrigger className="text-foreground">{faq.question}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -252,41 +254,41 @@ export default function Landing() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <FileText className="h-6 w-6 text-primary" />
-                <span className="font-bold">OneClick Credentials</span>
+                <span className="font-bold text-foreground">OneClick Credentials</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Making credential requests fast, secure, and hassle-free for students.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <SignInButton mode="modal">
-                    <Button variant="link" className="h-auto p-0">Login</Button>
+                    <Button variant="link" className="h-auto p-0 text-primary">Login</Button>
                   </SignInButton>
                 </li>
                 <li>
                   <SignUpButton mode="modal">
-                    <Button variant="link" className="h-auto p-0">Sign Up</Button>
+                    <Button variant="link" className="h-auto p-0 text-primary">Sign Up</Button>
                   </SignUpButton>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Button variant="link" className="h-auto p-0">Help Center</Button></li>
-                <li><Button variant="link" className="h-auto p-0">Contact Us</Button></li>
-                <li><Button variant="link" className="h-auto p-0">FAQs</Button></li>
+              <h4 className="font-semibold mb-4 text-foreground">Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Button variant="link" className="h-auto p-0 text-primary">Help Center</Button></li>
+                <li><Button variant="link" className="h-auto p-0 text-primary">Contact Us</Button></li>
+                <li><Button variant="link" className="h-auto p-0 text-primary">FAQs</Button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Button variant="link" className="h-auto p-0">Privacy Policy</Button></li>
-                <li><Button variant="link" className="h-auto p-0">Terms of Service</Button></li>
-                <li><Button variant="link" className="h-auto p-0">Data Protection</Button></li>
+              <h4 className="font-semibold mb-4 text-foreground">Legal</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Button variant="link" className="h-auto p-0 text-primary">Privacy Policy</Button></li>
+                <li><Button variant="link" className="h-auto p-0 text-primary">Terms of Service</Button></li>
+                <li><Button variant="link" className="h-auto p-0 text-primary">Data Protection</Button></li>
               </ul>
             </div>
           </div>

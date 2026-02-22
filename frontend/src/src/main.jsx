@@ -6,6 +6,7 @@ import App from './App'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { ThemeProvider } from './components/ui/theme-provider'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -18,7 +19,9 @@ createRoot(document.getElementById('root')).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <Provider store={store}>
         <Router>
-          <App />
+          <ThemeProvider defaultTheme="light" storageKey="oneclick-theme">
+            <App />
+          </ThemeProvider>
         </Router>
       </Provider>
     </ClerkProvider>

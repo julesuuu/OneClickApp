@@ -19,7 +19,7 @@ const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
             <CardTitle className="text-2xl font-bold">
               Student Information
             </CardTitle>
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary text-center">
               Step 2/3
             </span>
           </div>

@@ -12,7 +12,7 @@ const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
             <CardTitle className="text-2xl font-bold">
               Review Information
             </CardTitle>
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary text-center">
               Step 3/3
             </span>
           </div>
