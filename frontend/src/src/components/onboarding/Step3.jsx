@@ -1,83 +1,70 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../ui/card'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
-import { Badge } from '../ui/badge'
 import { Progress } from '../ui/progress'
 
 const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
   return (
-    <div className='min-h-screen bg-slate-50/50 pt-24 pb-12 px-4 font-mono'>
-      <Card className='max-w-md mx-auto border-none shadow-xl shadow-slate-200/50 rounded-2xl'>
-        <CardHeader className='space-y-1 pb-6 rounded-t-2xl'>
+    <div className="min-h-screen bg-muted/30 pt-24 pb-12 px-4">
+      <Card className="max-w-md mx-auto">
+        <CardHeader className="space-y-1 pb-6">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-black tracking-tighter text-indigo-600">
+            <CardTitle className="text-2xl font-bold">
               Review Information
             </CardTitle>
-            <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600 text-center">
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
               Step 3/3
             </span>
           </div>
-          <CardDescription className='font-sans'>
+          <CardDescription>
             Verify your details before submitting
           </CardDescription>
-          <Progress
-            value={100}
-            className="mt-8 h-2 bg-indigo-800/50"
-            indicatorclassname="bg-white" 
-            />
+          <Progress value={100} className="mt-8" />
         </CardHeader>
 
-        <CardContent className='bg-white px-6 sm:px-10 space-y-6 pt-6'>
-          {/* Personal Summary */}
-          <div className='space-y-3'>
-            <h4 className='text-[10px] font-bold text-indigo-400 uppercase tracking-widest'>
-              Personal Info
-            </h4>
-            <div className='grid grid-cols-2 gap-y-2 text-sm font-sans space-between'>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Name</span>
-              <span className='text-right font-bold'>{formData.name}</span>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Phone Number</span>
-              <span className='text-right font-bold'>{formData.phone}</span>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Gender</span>
-              <span className='text-right font-bold capitalize'>
-                {formData.gender}
-              </span>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Birthday</span>
-              <span className='text-right font-bold'>{formData.birthdate}</span>
+        <CardContent className="space-y-6 pt-6">
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold">Personal Info</h4>
+            <div className="grid grid-cols-2 gap-y-2 text-sm">
+              <span className="text-muted-foreground">Name</span>
+              <span className="text-right font-medium">{formData.name}</span>
+              <span className="text-muted-foreground">Phone Number</span>
+              <span className="text-right font-medium">{formData.phone}</span>
+              <span className="text-muted-foreground">Gender</span>
+              <span className="text-right font-medium capitalize">{formData.gender}</span>
+              <span className="text-muted-foreground">Birthday</span>
+              <span className="text-right font-medium">{formData.birthdate}</span>
             </div>
           </div>
 
-          <Separator className='bg-gray-100' />
+          <Separator />
 
-          {/* Academic Summary */}
-          <div className='space-y-3'>
-            <h4 className='text-[10px] font-bold text-indigo-400 uppercase tracking-widest'>
-              Academic Info
-            </h4>
-            <div className='grid grid-cols-2 gap-y-2 text-sm font-sans'>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>LRN</span>
-              <span className='text-right font-bold'>{formData.lrn}</span>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Course</span>
-              <span className='text-right font-bold'>{formData.course}</span>
-              <span className='text-xs font-bold uppercase tracking-wider text-slate-400'>Year</span>
-              <span className='text-right font-bold'>{formData.yearLevel}</span>
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold">Academic Info</h4>
+            <div className="grid grid-cols-2 gap-y-2 text-sm">
+              <span className="text-muted-foreground">LRN</span>
+              <span className="text-right font-medium">{formData.lrn}</span>
+              <span className="text-muted-foreground">Course</span>
+              <span className="text-right font-medium">{formData.course}</span>
+              <span className="text-muted-foreground">Year</span>
+              <span className="text-right font-medium">{formData.yearLevel}</span>
             </div>
           </div>
         </CardContent>
 
-        <CardFooter className='bg-white px-6 sm:px-10 pb-10 flex gap-3 pt-6 rounded-b-2xl'>
+        <CardFooter className="flex gap-3 pt-6">
           <Button
-            variant='outline'
+            variant="outline"
             onClick={onBack}
             disabled={isLoading}
-            className='flex-1 h-12 rounded-xl border-gray-200 font-bold text-gray-400'
+            className="flex-1 h-12"
           >
             Edit
           </Button>
           <Button
             onClick={onFinalSubmit}
             disabled={isLoading}
-            className='flex-1 h-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-bold text-white shadow-lg shadow-indigo-100 transition-all active:scale-95'
+            className="flex-1 h-12"
           >
             {isLoading ? 'Saving...' : 'Finish'}
           </Button>
