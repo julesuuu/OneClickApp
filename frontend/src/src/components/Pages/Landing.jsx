@@ -1,4 +1,5 @@
-import { FileText, CreditCard, MapPin, Clock, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { useState } from 'react'
+import { FileText, CreditCard, MapPin, Clock, ArrowRight, CheckCircle2, Menu, X } from 'lucide-react'
 import { SignInButton, SignUpButton, useAuth } from '@clerk/clerk-react'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,6 +20,7 @@ import {
 export default function Landing() {
   const { isSignedIn } = useAuth()
   const navigate = useNavigate()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const features = [
     {
@@ -91,7 +93,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen w-full bg-background overflow-x-hidden">
       {/* Navigation */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -102,7 +104,9 @@ export default function Landing() {
             </div>
             <span className="text-xl font-bold text-foreground">OneClick Credentials</span>
           </div>
-          <nav className="flex items-center gap-2">
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-2">
             <ThemeToggle />
             {isSignedIn ? (
               <Button variant="ghost" onClick={handleGetStarted}>
@@ -119,11 +123,43 @@ export default function Landing() {
               </>
             )}
           </nav>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background px-4 py-4 space-y-2">
+            <div className="flex items-center justify-between py-2">
+              <span className="text-sm text-muted-foreground">Theme</span>
+              <ThemeToggle />
+            </div>
+            {isSignedIn ? (
+              <Button variant="ghost" className="w-full justify-start" onClick={handleGetStarted}>
+                Dashboard
+              </Button>
+            ) : (
+              <>
+                <SignInButton mode="modal">
+                  <Button variant="link" className="w-full justify-start pl-0 text-foreground">Log In</Button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <Button variant="link" className="w-full justify-start pl-0 text-primary">Sign Up</Button>
+                </SignUpButton>
+              </>
+            )}
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground py-24">
+      <section className="relative w-full bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
             Request School Credentials Online - Fast & Secure
@@ -156,7 +192,7 @@ export default function Landing() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="w-full py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Why Choose OneClick Credentials?</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -179,7 +215,7 @@ export default function Landing() {
       </section>
 
       {/* Supported Documents */}
-      <section className="py-20">
+      <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Available Documents</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -199,7 +235,7 @@ export default function Landing() {
       </section>
 
       {/* Pricing Table */}
-      <section className="py-20 bg-muted/30">
+      <section className="w-full py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Transparent Pricing</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -230,7 +266,7 @@ export default function Landing() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20">
+      <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-foreground">Frequently Asked Questions</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -248,7 +284,7 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-muted/30">
+      <footer className="w-full border-t py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
