@@ -18,7 +18,7 @@ function App() {
   const { isLoaded, isSignedIn, user } = useUser()
   const dispatch = useDispatch()
 
-  const { profile, loading } = useSelector((state) => state.user)
+  const { loading } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (isSignedIn && user) {
@@ -41,14 +41,12 @@ function App() {
       <SignedOut>
         <div className="landing">
           <Landing />
-          <SignInButton mode="modal" className="btn-primary" />
-          <SignUpButton />
         </div>
       </SignedOut>
 
       <SignedIn>
-        <SignOutButton />
         <main>
+        <SignOutButton />
           <Parent />
         </main>
       </SignedIn>
