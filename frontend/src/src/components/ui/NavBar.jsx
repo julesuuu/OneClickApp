@@ -55,6 +55,7 @@ export default function NavBar() {
             </div>
 
             {/* Mobile menu button */}
+            <UserButton afterSignOutUrl="/" />
             <button
               className="md:hidden p-2 text-foreground"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -78,7 +79,6 @@ export default function NavBar() {
               </Button>
             ))}
             <div className="pt-2 border-t">
-              <UserButton afterSignOutUrl="/" />
             </div>
           </div>
         )}
