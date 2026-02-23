@@ -55,18 +55,18 @@ export default function Landing() {
   ]
 
   const pricing = [
-    { name: 'Transcript of Records (TOR)', price: 150 },
-    { name: 'Diploma', price: 200 },
-    { name: 'Good Moral Character', price: 50 },
-    { name: 'Certificate of Enrollment', price: 50 },
-    { name: 'Certificate of Grades', price: 50 },
-    { name: 'Honorable Dismissal', price: 100 },
+    { name: 'Transcript of Records (TOR)', price: 500 },
+    { name: 'Diploma', price: 300 },
+    { name: 'Good Moral Character', price: 100 },
+    { name: 'Certificate of Enrollment', price: 200 },
+    { name: 'Certificate of Grades', price: 150 },
+    { name: 'Honorable Dismissal', price: 250 },
   ]
 
   const faqs = [
     {
       question: 'How long does it take to process my request?',
-      answer: 'Regular processing takes 5-7 business days, while rush processing takes 2-3 business days.',
+      answer: 'Document processing takes 5-7 business days.',
     },
     {
       question: 'Can I request multiple documents at once?',
@@ -137,7 +137,7 @@ export default function Landing() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t bg-background px-4 py-4 space-y-2">
             <div className="flex items-center justify-between py-2">
-              <span className="text-sm text-muted-foreground">Theme</span>
+              <span className="text-sm font-bold text-muted-foreground">Theme</span>
               <ThemeToggle />
             </div>
             {isSignedIn ? (
@@ -200,7 +200,7 @@ export default function Landing() {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="border-2 hover:border-primary/50 transition-colors">
+              <Card key={index} className="border-2 hover:border-primary/50 transition-colors shadow-lg">
                 <CardHeader>
                   <div className="mb-2">{feature.icon}</div>
                   <CardTitle className="text-xl text-foreground">{feature.title}</CardTitle>
@@ -223,7 +223,7 @@ export default function Landing() {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {documents.map((doc, index) => (
-              <Card key={index} className="bg-muted/50">
+              <Card key={index} className="bg-muted/50 shadow-md">
                 <CardContent className="flex items-center gap-3 p-4">
                   <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
                   <span className="font-medium text-foreground">{doc}</span>
@@ -241,26 +241,26 @@ export default function Landing() {
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             No hidden fees. Simple and transparent pricing for all documents
           </p>
-          <Card className="max-w-md mx-auto overflow-hidden">
+          <Card className="w-full max-w-md md:max-w-2xl lg:max-w-4xl mx-auto overflow-hidden shadow-xl border-none rounded-2xl">
             <Table>
               <TableHeader>
                 <TableRow className="bg-primary hover:bg-primary">
-                  <TableHead className="text-primary-foreground font-bold w-full">Document Type</TableHead>
-                  <TableHead className="text-primary-foreground font-bold text-right">Price</TableHead>
+                  <TableHead className="text-primary-foreground font-bold w-full p-5">Document Type</TableHead>
+                  <TableHead className="text-primary-foreground font-bold text-right p-5">Price</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {pricing.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-medium text-foreground">{item.name}</TableCell>
-                    <TableCell className="text-right font-mono text-foreground">₱{item.price}</TableCell>
+                    <TableCell className="font-medium text-foreground p-5">{item.name}</TableCell>
+                    <TableCell className="text-right font-mono text-foreground p-5">₱{item.price}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </Card>
           <p className="text-center text-muted-foreground mt-6 text-sm">
-            * Additional copies: ₱50 each
+            * Stamp: ₱30 each
           </p>
         </div>
       </section>
