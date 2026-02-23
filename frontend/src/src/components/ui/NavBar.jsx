@@ -55,7 +55,6 @@ export default function NavBar() {
             </div>
 
             {/* Mobile menu button */}
-            <UserButton afterSignOutUrl="/" />
             <button
               className="md:hidden p-2 text-foreground"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -68,6 +67,10 @@ export default function NavBar() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t bg-background px-4 py-4 space-y-2">
+              <div className="flex items-center gap-2 pl-2.5">
+                <UserButton afterSignOutUrl="/" />
+                <span className="gap-2 pl-0.5 font-bold text-foreground text-sm py-2">Profile</span>
+              </div>
             {navigation.map((item) => (
               <Button
                 key={item.name}
