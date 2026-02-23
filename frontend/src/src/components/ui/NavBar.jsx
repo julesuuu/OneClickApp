@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { SignOutButton, UserButton } from '@clerk/clerk-react'
 import { FileText, Menu, X, Bell, Home, FileStack, Calendar, Settings, LogOut } from 'lucide-react'
@@ -6,14 +7,15 @@ import { Button } from './button'
 import { ThemeToggle } from './theme-toggle'
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: Home, current: true },
-  { name: 'Requests', href: '#', icon: FileStack, current: false },
-  { name: 'Appointments', href: '#', icon: Calendar, current: false },
-  { name: 'Settings', href: '#', icon: Settings, current: false },
+  { name: 'Dashboard', href: '/dashboard', icon: Home },
+  { name: 'Requests', href: '/requests', icon: FileStack },
+  { name: 'Appointments', href: '#', icon: Calendar },
+  { name: 'Settings', href: '#', icon: Settings },
 ]
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
@@ -34,10 +36,13 @@ export default function NavBar() {
               <Button
                 key={item.name}
                 variant="ghost"
-                className={`${item.current ? 'bg-muted' : ''} text-foreground`}
+                asChild
+                className={`${location.pathname === item.href ? 'bg-muted' : ''} text-foreground`}
               >
-                <item.icon className="h-4 w-4 mr-2" />
-                {item.name}
+                <Link to={item.href}>
+                  <item.icon className="h-4 w-4 mr-2" />
+                  {item.name}
+                </Link>
               </Button>
             ))}
           </nav>
@@ -67,22 +72,23 @@ export default function NavBar() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t bg-background px-4 py-4 space-y-2">
-              <div className="flex items-center gap-2 pl-2.5">
-                <UserButton afterSignOutUrl="/" />
-                <span className="gap-2 pl-0.5 font-bold text-foreground text-sm py-2">Profile</span>
-              </div>
+            <div className="flex items-center gap-2 pl-2.5">
+              <UserButton afterSignOutUrl="/" />
+              <span className="gap-2 pl-0.5 font-bold text-foreground text-sm py-2">Profile</span>
+            </div>
             {navigation.map((item) => (
               <Button
                 key={item.name}
                 variant="ghost"
-                className={`w-full justify-start ${item.current ? 'bg-muted' : ''} text-foreground`}
+                asChild
+                className={`w-full justify-start ${location.pathname === item.href ? 'bg-muted' : ''} text-foreground`}
               >
-                <item.icon className="h-4 w-4 mr-2" />
-                {item.name}
+                <Link to={item.href} onClick={() => setMobileMenuOpen(false)}>
+                  <item.icon className="h-4 w-4 mr-2" />
+                  {item.name}
+                </Link>
               </Button>
             ))}
-            <div className="pt-2 border-t">
-            </div>
           </div>
         )}
       </div>

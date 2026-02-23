@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import Landing from './components/pages/Landing'
 import Dashboard from './components/pages/Dashboard'
+import RequestsPage from './components/pages/RequestsPage'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -39,7 +41,11 @@ function App() {
       </SignedOut>
 
       <SignedIn>
-        <Dashboard />
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/requests" element={<RequestsPage />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
       </SignedIn>
     </div>
   )
