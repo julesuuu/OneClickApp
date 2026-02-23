@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../ui/card'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Button } from '../ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { Progress } from '../ui/progress'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../../ui/card'
+import { Input } from '../../ui/input'
+import { Label } from '../../ui/label'
+import { Button } from '../../ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
+import { Progress } from '../../ui/progress'
 
 const Step2 = ({ lrn, studentNumber, course, yearLevel, onNext, onBack }) => {
   const handleContinue = (e) => {

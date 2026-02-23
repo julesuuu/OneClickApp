@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@clerk/clerk-react'
-import useField from '../../hooks/useField'
+import useField from '../../../hooks/useField'
 import { syncUserWithBackend } from '@/redux/userSlice'
 
 import Step1 from './Step1'

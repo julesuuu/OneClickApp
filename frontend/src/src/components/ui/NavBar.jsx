@@ -1,105 +1,88 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from '@headlessui/react'
-import { UserButton } from '@clerk/clerk-react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Logo } from './icons'
+import { useState } from 'react'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { SignOutButton, UserButton } from '@clerk/clerk-react'
+import { FileText, Menu, X, Bell, Home, FileStack, Calendar, Settings, LogOut } from 'lucide-react'
+import { Button } from './button'
+import { ThemeToggle } from './theme-toggle'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Requests', href: '#', current: false },
-  { name: 'Appointments', href: '#', current: false },
-  { name: 'Settings', href: '#', current: false },
+  { name: 'Dashboard', href: '/dashboard', icon: Home, current: true },
+  { name: 'Requests', href: '#', icon: FileStack, current: false },
+  { name: 'Appointments', href: '#', icon: Calendar, current: false },
+  { name: 'Settings', href: '#', icon: Settings, current: false },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function NavBar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
-    <Disclosure
-      as="nav"
-      className="relative bg-gray-800/50 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10"
-    >
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="group-data-open:hidden block size-6" />
-              <XMarkIcon aria-hidden="true" className="group-data-open:block hidden size-6" />
-            </DisclosureButton>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <Logo className="h-8 w-8 text-indigo-500" />
-              <span className="ml-2 text-lg font-semibold text-white">OneClick</span>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+      <div className="container mx-auto">
+        <div className="flex h-16 items-center justify-between px-4">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <FileText className="h-8 w-8 text-primary" />
+              <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-teal-500" />
             </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current
-                        ? 'bg-indigo-600/80 text-white'
-                        : 'text-gray-300 hover:bg-white/10 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
+            <span className="text-xl font-bold text-foreground">OneClick</span>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navigation.map((item) => (
+              <Button
+                key={item.name}
+                variant="ghost"
+                className={`${item.current ? 'bg-muted' : ''} text-foreground`}
+              >
+                <item.icon className="h-4 w-4 mr-2" />
+                {item.name}
+              </Button>
+            ))}
+          </nav>
+
+          {/* Right Side */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            
+            <Button variant="ghost" size="icon" className="text-foreground">
+              <Bell className="h-5 w-5" />
+            </Button>
+
+            <div className="hidden md:block">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+
+            {/* Mobile menu button */}
             <button
-              type="button"
-              className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+              className="md:hidden p-2 text-foreground"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
-
-            {/* Profile dropdown */}
-            <UserButton />
           </div>
         </div>
-      </div>
 
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pb-3 pt-2">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                item.current
-                  ? 'bg-gray-950/50 text-white'
-                  : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium'
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
-        </div>
-      </DisclosurePanel>
-    </Disclosure>
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background px-4 py-4 space-y-2">
+            {navigation.map((item) => (
+              <Button
+                key={item.name}
+                variant="ghost"
+                className={`w-full justify-start ${item.current ? 'bg-muted' : ''} text-foreground`}
+              >
+                <item.icon className="h-4 w-4 mr-2" />
+                {item.name}
+              </Button>
+            ))}
+            <div className="pt-2 border-t">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
   )
 }

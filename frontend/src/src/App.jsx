@@ -1,18 +1,9 @@
 import { useEffect } from 'react'
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  SignUpButton,
-  UserButton,
-  useUser,
-} from '@clerk/clerk-react'
+import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { syncUserWithBackend, clearUser } from './redux/userSlice'
-import NavBar from './components/ui/NavBar'
-import Parent from './components/onboarding/Parent'
-import Landing from './components/Pages/Landing'
+import Landing from './components/pages/Landing'
+import Dashboard from './components/pages/Dashboard'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -34,21 +25,21 @@ function App() {
   }, [isSignedIn, user, dispatch])
 
   if (!isLoaded || (isSignedIn && loading)) {
-    return <div className="loading-screen">Verifiying Student Profile...</div>
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-foreground">Verifying Student Profile...</p>
+      </div>
+    )
   }
+
   return (
     <div>
       <SignedOut>
-        <div className="landing">
-          <Landing />
-        </div>
+        <Landing />
       </SignedOut>
 
       <SignedIn>
-        <main>
-        <SignOutButton />
-          <Parent />
-        </main>
+        <Dashboard />
       </SignedIn>
     </div>
   )

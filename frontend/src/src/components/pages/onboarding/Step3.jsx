@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../ui/card'
-import { Button } from '../ui/button'
-import { Separator } from '../ui/separator'
-import { Progress } from '../ui/progress'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../../ui/card'
+import { Button } from '../../ui/button'
+import { Separator } from '../../ui/separator'
+import { Progress } from '../../ui/progress'
 
 const Step3 = ({ formData, onBack, onFinalSubmit, isLoading }) => {
   return (
