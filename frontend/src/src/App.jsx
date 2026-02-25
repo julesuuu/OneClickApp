@@ -6,6 +6,7 @@ import { syncUserWithBackend, clearUser } from './redux/userSlice'
 import Landing from './components/pages/Landing'
 import Dashboard from './components/pages/Dashboard'
 import RequestsPage from './components/pages/RequestsPage'
+import NewRequestPage from './components/pages/NewRequestPage'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -44,6 +45,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
+          <Route path="/new-request" element={<NewRequestPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </SignedIn>

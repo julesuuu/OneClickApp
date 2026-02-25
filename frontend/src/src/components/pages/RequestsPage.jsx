@@ -123,9 +123,11 @@ const RequestsPage = () => {
             <h1 className="text-3xl font-bold text-foreground mb-2">My Requests</h1>
             <p className="text-muted-foreground">Manage and track all your document requests</p>
           </div>
-          <Button disabled>
-            <Plus className="w-4 h-4 mr-2" />
-            New Request
+          <Button variant="secondary" asChild>
+            <Link to="/new-request">
+              <Plus className="w-4 h-4 mr-2" />
+              New Request 
+            </Link>
           </Button>
         </div>
 

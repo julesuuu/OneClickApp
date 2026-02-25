@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useUser } from '@clerk/clerk-react'
 import { FileText, Clock, CheckCircle, Calendar, DollarSign, Plus, Eye, CreditCard, X } from 'lucide-react'
 
@@ -219,9 +220,11 @@ const Dashboard = () => {
             <CardContent className="pt-6">
               <h3 className="text-xl font-bold mb-2">Need a Document?</h3>
               <p className="text-primary-foreground/80 mb-4">Submit a new request and get your credentials in just a few days.</p>
-              <Button variant="secondary" disabled>
-                <Plus className="w-4 h-4 mr-2" />
-                New Request
+              <Button variant="secondary" asChild>
+                <Link to="/new-request">
+                  <Plus className="w-4 h-4 mr-2" />
+                  New Request
+                </Link>
               </Button>
             </CardContent>
           </Card>
