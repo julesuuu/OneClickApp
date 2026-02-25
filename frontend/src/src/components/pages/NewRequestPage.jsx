@@ -100,12 +100,16 @@ const NewRequestPage = () => {
         </div>
 
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+        <div className="mb-12 max-w-3xl mx-auto">
+          <div className="relative flex justify-between">
+            {/* Background Connecting Line */}
+            <div className="absolute top-5 left-0 w-full h-1 bg-muted -z-0" />
+            
             {steps.map((s, index) => (
-              <div key={s.num} className="flex items-center flex-1">
+              <div key={s.num} className="relative z-10 flex flex-col items-center flex-1">
+                {/* Step Circle */}
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center border-4 border-background transition-colors duration-300 ${
                     s.num < step
                       ? 'bg-teal-500 text-white'
                       : s.num === step
@@ -115,19 +119,25 @@ const NewRequestPage = () => {
                 >
                   {s.num < step ? <Check className="w-5 h-5" /> : s.num}
                 </div>
+
+                {/* Label - Positioned absolutely or with margin to ensure center alignment */}
+                <div className="absolute top-12 text-center w-32">
+                  <span className={`text-xs font-bold uppercase tracking-tighter ${
+                    s.num === step ? 'text-primary' : 'text-muted-foreground'
+                  }`}>
+                    {s.label}
+                  </span>
+                </div>
+
+                {/* Completed Line Overlay (Optional: Makes the line turn green as you progress) */}
                 {index < steps.length - 1 && (
                   <div
-                    className={`flex-1 h-1 mx-2 ${
-                      s.num < step ? 'bg-teal-500' : 'bg-muted'
+                    className={`absolute top-5 left-[50%] w-full h-1 -z-10 ${
+                      s.num < step ? 'bg-teal-500' : 'bg-transparent'
                     }`}
                   />
                 )}
               </div>
-            ))}
-          </div>
-          <div className="flex justify-between text-sm text-muted-foreground">
-            {steps.map((s) => (
-              <span key={s.num}>{s.label}</span>
             ))}
           </div>
         </div>
