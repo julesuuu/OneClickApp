@@ -48,8 +48,8 @@ function App() {
 
       <SignedIn>
         <Routes>
-          <Route path="/profile-completion" element={<Parent />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile-completion" element={isProfileComplete ? <Navigate to="/dashboard" replace /> : <Parent />} />
+          <Route path="/dashboard" element={isProfileIncomplete ? <Navigate to="/profile-completion" replace /> : <Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
           <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/new-request" element={<NewRequestPage />} />
@@ -58,9 +58,7 @@ function App() {
             element={
               isProfileIncomplete 
                 ? <Navigate to="/profile-completion" replace /> 
-                : isProfileComplete 
-                  ? <Navigate to="/dashboard" replace />
-                  : <Navigate to="/profile-completion" replace />
+                : <Navigate to="/dashboard" replace />
             } 
           />
         </Routes>
