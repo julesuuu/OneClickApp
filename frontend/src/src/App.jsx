@@ -8,12 +8,13 @@ import Dashboard from './components/pages/Dashboard'
 import RequestsPage from './components/pages/RequestsPage'
 import NewRequestPage from './components/pages/NewRequestPage'
 import AppointmentsPage from './components/pages/AppointmentsPage'
+import Parent from './components/pages/onboarding/Parent'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
   const dispatch = useDispatch()
 
-  const { loading } = useSelector((state) => state.user)
+  const { profile, loading } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (isSignedIn && user) {
@@ -36,6 +37,9 @@ function App() {
     )
   }
 
+  const isProfileIncomplete = isSignedIn && profile && !profile.profileCompleted
+  const isProfileComplete = isSignedIn && profile && profile.profileCompleted
+
   return (
     <div>
       <SignedOut>
@@ -44,11 +48,21 @@ function App() {
 
       <SignedIn>
         <Routes>
+          <Route path="/profile-completion" element={<Parent />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
           <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/new-request" element={<NewRequestPage />} />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route 
+            path="/" 
+            element={
+              isProfileIncomplete 
+                ? <Navigate to="/profile-completion" replace /> 
+                : isProfileComplete 
+                  ? <Navigate to="/dashboard" replace />
+                  : <Navigate to="/profile-completion" replace />
+            } 
+          />
         </Routes>
       </SignedIn>
     </div>
