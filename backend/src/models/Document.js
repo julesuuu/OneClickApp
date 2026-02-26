@@ -1,91 +1,96 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const documentSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-    index: true
-  },
-  credentialType: {
-    type: String,
-    required: true,
-    enum: [
-      'Transcript of Records',
-      'Diploma',
-      'Form 138',
-      'Certificate of Enrollment',
-      'Course Description',
-      'Good Moral Character',
-      'Honorable Dismissal',
+const documentSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
+    credentialType: {
+      type: String,
+      required: true,
+      enum: [
+        "Transcript of Records",
+        "Diploma",
+        "Form 138",
+        "Certificate of Enrollment",
+        "Course Description",
+        "Good Moral Character",
+        "Honorable Dismissal",
+      ],
+      trim: true,
+    },
+    purpose: {
+      type: String,
+      required: true,
+      enum: [
+        "Employment",
+        "Further Studies / Graduate School",
+        "Transfer to another school",
+        "Visa / Immigration",
+        "Personal Use",
+        "Other",
+      ],
+    },
+    customPurpose: {
+      type: String,
+      trim: true,
+      sparse: true,
+      default: null,
+    },
+    copies: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 10,
+      default: 1,
+    },
+    status: {
+      type: String,
+      enum: [
+        "Pending",
+        "Payment Pending",
+        "Processing",
+        "Ready for Pickup",
+        "Completed",
+        "Cancelled",
+        "Rejected",
+      ],
+      default: "Pending",
+      index: true,
+    },
+    payments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Payment",
+      },
     ],
-    trim: true
+    appointment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appointment",
+      default: null,
+    },
+    notes: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
-  purpose: {
-    type: String,
-    required: true,
-    enum: [
-      'Employment',
-      'Further Studies / Graduate School',
-      'Transfer to another school',
-      'Visa / Immigration',
-      'Personal Use',
-      'Other'
-    ]
-  },
-  customPurpose: {
-    type: String,
-    trim: true,
-    sparse: true,
-    default: null
-  },
-  copies: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 10,
-    default: 1
-  },
-  status: {
-    type: String,
-    enum: [
-      'Pending',
-      'Payment Pending',
-      'Processing',
-      'Ready for Pickup',
-      'Completed',
-      'Cancelled',
-      'Rejected'
-    ],
-    default: 'Pending',
-    index: true
-  },
-  payments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Payment',
-  }],
-  appointment: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Appointment',
-    default: null
-  },
-  notes: {
-    type: String,
-    trim: true,
-    default: null
-  }
-}, { timestamps: true })
+  { timestamps: true },
+)
 
-documentSchema.set('toJSON', {
+documentSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-  }
+  },
 })
 
 documentSchema.index({ user: 1, status: 1, createdAt: -1 })
 
-const Document = mongoose.model('Document', documentSchema)
+const Document = mongoose.model("Document", documentSchema)
 
 module.exports = Document

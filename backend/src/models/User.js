@@ -1,98 +1,105 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const userSchema = new mongoose.Schema({
-  clerkId: {
-    type: String,
-    required: true,
-    unique: true,
-    index: true
+const userSchema = new mongoose.Schema(
+  {
+    clerkId: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    name: {
+      type: String,
+      trim: true,
+    },
+    gender: {
+      type: String,
+      enum: ["male", "female", "non-binary", "other"],
+      default: "male",
+    },
+    birthdate: {
+      type: Date,
+    },
+    phone: {
+      type: String,
+    },
+    lrn: {
+      type: String,
+      unique: true,
+      sparse: true,
+      trim: true,
+    },
+    studentNumber: {
+      type: String,
+      unique: true,
+      sparse: true,
+      trim: true,
+    },
+    course: {
+      type: String,
+      enum: ["BSIT", "BSBA", "BSCrim", "BSHM", "BSE"],
+    },
+    yearLevel: {
+      type: String,
+      enum: [
+        "1st Year",
+        "2nd Year",
+        "3rd Year",
+        "4th Year",
+        "Graduating",
+        "Graduate",
+      ],
+    },
+    role: {
+      type: String,
+      enum: ["student", "admin"],
+      default: "student",
+    },
+    isValidated: {
+      type: Boolean,
+      default: false,
+    },
+    profileCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    documents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Document",
+      },
+    ],
+    payments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Payment",
+      },
+    ],
   },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true
-  },
-  name: {
-    type: String,
-    trim: true
-  },
-  gender: {
-    type: String,
-    enum: ['male', 'female', 'non-binary', 'other'],
-    default: 'male'
-  },
-  birthdate: {
-    type: Date,
-  },
-  phone: {
-    type: String,
-  },
-  lrn: {
-    type: String,
-    unique: true,
-    sparse: true,
-    trim: true
-  },
-  studentNumber: {
-    type: String,
-    unique: true,
-    sparse: true,
-    trim: true
-  },
-  course: {
-    type: String,
-    enum: ['BSIT', 'BSBA', 'BSCrim', 'BSHM', 'BSE']
-  },
-  yearLevel: {
-    type: String,
-    enum: [
-      '1st Year',
-      '2nd Year',
-      '3rd Year',
-      '4th Year',
-      'Graduating',
-      'Graduate'
-    ]
-  },
-  role: {
-    type: String,
-    enum: ['student', 'admin'],
-    default: 'student'
-  },
-  isValidated: {
-    type: Boolean,
-    default: false
-  },
-  profileCompleted: {
-    type: Boolean,
-    default: false
-  },
-  documents: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Document'
-  }],
-  payments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Payment'
-  }]
-}, { timestamps: true })
+  { timestamps: true },
+)
 
-userSchema.set('toJSON', {
+userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-  }
+  },
 })
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema)
 
 module.exports = User
