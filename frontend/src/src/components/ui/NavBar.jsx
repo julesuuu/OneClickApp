@@ -9,7 +9,7 @@ import { ThemeToggle } from './theme-toggle'
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Requests', href: '/requests', icon: FileStack },
-  { name: 'Appointments', href: '#', icon: Calendar },
+  { name: 'Appointments', href: '/appointments', icon: Calendar },
   { name: 'Settings', href: '#', icon: Settings },
 ]
 

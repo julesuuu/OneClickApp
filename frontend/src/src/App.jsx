@@ -7,6 +7,7 @@ import Landing from './components/pages/Landing'
 import Dashboard from './components/pages/Dashboard'
 import RequestsPage from './components/pages/RequestsPage'
 import NewRequestPage from './components/pages/NewRequestPage'
+import AppointmentsPage from './components/pages/AppointmentsPage'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -45,6 +46,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
+          <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/new-request" element={<NewRequestPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
