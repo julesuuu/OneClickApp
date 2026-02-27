@@ -6,6 +6,7 @@ const { errorHandler } = require("./utils/middleware")
 const connectDB = require("./db")
 const usersRouter = require("./controllers/users")
 const documentsRouter = require("./controllers/documents")
+const appointmentRouter = require("./controllers/appointments")
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(clerkMiddleware())
 app.use("/api/users", usersRouter)
 app.use("/api/documents", documentsRouter)
+app.use("/api/appointments", appointmentRouter)
 
 app.use(errorHandler)
 
