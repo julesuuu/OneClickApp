@@ -8,6 +8,7 @@ import Dashboard from './components/pages/Dashboard'
 import RequestsPage from './components/pages/RequestsPage'
 import NewRequestPage from './components/pages/NewRequestPage'
 import AppointmentsPage from './components/pages/AppointmentsPage'
+import SettingsPage from './components/pages/SettingsPage'
 import Parent from './components/pages/onboarding/Parent'
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path="/dashboard" element={isProfileIncomplete ? <Navigate to="/profile-completion" replace /> : <Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
           <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/new-request" element={<NewRequestPage />} />
           <Route 
             path="/" 

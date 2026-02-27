@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Requests', href: '/requests', icon: FileStack },
   { name: 'Appointments', href: '/appointments', icon: Calendar },
-  { name: 'Settings', href: '#', icon: Settings },
+  { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
 export default function NavBar() {
