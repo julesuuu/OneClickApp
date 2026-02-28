@@ -29,12 +29,12 @@ const NewRequestPage = () => {
   const [attachments, setAttachments] = useState([])
 
   const documentTypes = [
-    { value: 'tor', label: 'Transcript of Records (TOR)', price: 150 },
-    { value: 'diploma', label: 'Diploma', price: 200 },
-    { value: 'good-moral', label: 'Certificate of Good Moral Character', price: 50 },
-    { value: 'coe', label: 'Certificate of Enrollment', price: 50 },
-    { value: 'cog', label: 'Certificate of Grades', price: 50 },
-    { value: 'hd', label: 'Honorable Dismissal', price: 100 },
+    { value: 'tor', label: 'Transcript of Records (TOR)', price: 500 },
+    { value: 'diploma', label: 'Diploma', price: 300 },
+    { value: 'good-moral', label: 'Certificate of Good Moral Character', price: 100 },
+    { value: 'coe', label: 'Certificate of Enrollment', price: 200 },
+    { value: 'cog', label: 'Certificate of Grades', price: 150 },
+    { value: 'hd', label: 'Honorable Dismissal', price: 250 },
   ]
 
   const purposes = [

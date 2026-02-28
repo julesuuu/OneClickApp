@@ -44,7 +44,7 @@ const RequestsPage = () => {
           paymentStatus: 'paid',
           paymentMethod: 'online',
           date: '2026-02-15',
-          amount: 150,
+          amount: 500,
         },
         {
           id: '2',
@@ -55,7 +55,7 @@ const RequestsPage = () => {
           paymentStatus: 'paid',
           paymentMethod: 'online',
           date: '2026-02-10',
-          amount: 50,
+          amount: 100,
         },
         {
           id: '3',
@@ -66,7 +66,7 @@ const RequestsPage = () => {
           paymentStatus: 'paid',
           paymentMethod: 'cash',
           date: '2026-02-05',
-          amount: 100,
+          amount: 200,
         },
         {
           id: '4',
@@ -77,7 +77,7 @@ const RequestsPage = () => {
           paymentStatus: 'unpaid',
           paymentMethod: 'cash',
           date: '2026-02-18',
-          amount: 200,
+          amount: 300,
         },
       ]
       localStorage.setItem(`requests_${user?.id}`, JSON.stringify(demoRequests))
