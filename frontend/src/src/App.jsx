@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { syncUserWithBackend, clearUser } from './redux/userSlice'
+import { Loader2 } from 'lucide-react'
+import { useUserSync } from './hooks/useUserSync'
 import Landing from './components/pages/Landing'
 import Dashboard from './components/pages/Dashboard'
 import RequestsPage from './components/pages/RequestsPage'
@@ -13,27 +13,26 @@ import Parent from './components/pages/onboarding/Parent'
 
 function App() {
   const { isLoaded, isSignedIn, user } = useUser()
-  const dispatch = useDispatch()
-
-  const { profile, loading } = useSelector((state) => state.user)
+  const { profile, loading, syncUser, clearUser } = useUserSync()
 
   useEffect(() => {
     if (isSignedIn && user) {
-      dispatch(
-        syncUserWithBackend({
-          email: user.primaryEmailAddress.emailAddress,
-          username: user.username || user.firstName,
-        })
-      )
+      syncUser({
+        email: user.primaryEmailAddress.emailAddress,
+        username: user.username || user.firstName,
+      })
     } else if (!isSignedIn) {
-      dispatch(clearUser())
+      clearUser()
     }
-  }, [isSignedIn, user, dispatch])
+  }, [isSignedIn, user, syncUser, clearUser])
 
   if (!isLoaded || (isSignedIn && loading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-foreground">Verifying Student Profile...</p>
+        <div className="flex flex-col items-center gap-2">
+          <Loader2 className="h-8 w-8 animate-spin text-foreground" />
+          <p className="text-foreground">Verifying Student Profile...</p>
+        </div>
       </div>
     )
   }

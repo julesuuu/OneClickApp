@@ -1,20 +1,18 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@clerk/clerk-react'
 import useField from '../../../hooks/useField'
-import { syncUserWithBackend } from '@/redux/userSlice'
+import { useUserSync } from '@/hooks/useUserSync'
 
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 
 const Onboarding = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { getToken } = useAuth()
-  const { profile } = useSelector((state) => state.user)
+  const { profile, syncUser } = useUserSync()
   
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +52,7 @@ const Onboarding = () => {
       })
 
       if (profile) {
-        dispatch(syncUserWithBackend({ email: profile.email, username: profile.username }))
+        syncUser({ email: profile.email, username: profile.username })
       }
       
       navigate('/dashboard')

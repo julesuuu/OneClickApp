@@ -1,14 +1,16 @@
-import { useMutation } from '@tanstack/react-query '
+import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import useUserStore from '../store/userStore'
+import { useUserStore } from '../store/userStore'
 
 export const useUserSync = () => {
-  const { setProfile, clearUser } = useUserStore()
+  const setProfile = useUserStore((state) => state.setProfile)
+  const clearUser = useUserStore((state) => state.clearUser)
+  const profile = useUserStore((state) => state.profile)
 
-  const syncUserwithBackend = async ({ email, username }) => {
+  const syncUserWithBackend = async ({ email, username }) => {
     const token = await window.Clerk.session.getToken()
     const response = await axios.post(
-      'http//localhost:3001/api/users/sync',
+      'http://localhost:3001/api/users/sync',
       { email, username },
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -16,7 +18,7 @@ export const useUserSync = () => {
   }
 
   const mutation = useMutation({
-    mutationFn: syncUserwithBackend,
+    mutationFn: syncUserWithBackend,
     onSuccess: (data) => {
       setProfile(data)
     },
@@ -26,7 +28,7 @@ export const useUserSync = () => {
   })
 
   return {
-    profile: useUserStore((state) => state.profile),
+    profile,
     loading: mutation.isPending,
     error: mutation.error,
     syncUser: mutation.mutate,
