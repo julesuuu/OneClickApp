@@ -7,6 +7,7 @@ const connectDB = require("./db")
 const usersRouter = require("./controllers/users")
 const documentsRouter = require("./controllers/documents")
 const appointmentRouter = require("./controllers/appointments")
+const adminRouter = require("./controllers/admin")
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(clerkMiddleware())
 app.use("/api/users", usersRouter)
 app.use("/api/documents", documentsRouter)
 app.use("/api/appointments", appointmentRouter)
+app.use("/api/admin", adminRouter)
 
 app.use(errorHandler)
 

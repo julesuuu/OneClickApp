@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema(
   {
@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female", "non-binary", "other"],
-      default: "male",
+      enum: ['male', 'female', 'non-binary', 'other'],
+      default: 'other',
     },
     birthdate: {
       type: Date,
@@ -50,23 +50,23 @@ const userSchema = new mongoose.Schema(
     },
     course: {
       type: String,
-      enum: ["BSIT", "BSBA", "BSCrim", "BSHM", "BSE"],
+      enum: ['BSIT', 'BSBA', 'BSCrim', 'BSHM', 'BSE'],
     },
     yearLevel: {
       type: String,
       enum: [
-        "1st Year",
-        "2nd Year",
-        "3rd Year",
-        "4th Year",
-        "Graduating",
-        "Graduate",
+        '1st Year',
+        '2nd Year',
+        '3rd Year',
+        '4th Year',
+        'Graduating',
+        'Graduate',
       ],
     },
     role: {
       type: String,
-      enum: ["student", "admin"],
-      default: "student",
+      enum: ['student', 'admin'],
+      default: 'student',
     },
     isValidated: {
       type: Boolean,
@@ -79,20 +79,20 @@ const userSchema = new mongoose.Schema(
     documents: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Document",
+        ref: 'Document',
       },
     ],
     payments: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment",
+        ref: 'Payment',
       },
     ],
   },
   { timestamps: true },
 )
 
-userSchema.set("toJSON", {
+userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -100,6 +100,6 @@ userSchema.set("toJSON", {
   },
 })
 
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

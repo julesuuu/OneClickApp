@@ -1,10 +1,10 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const documentSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
       index: true,
     },
@@ -12,13 +12,13 @@ const documentSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        "Transcript of Records",
-        "Diploma",
-        "Form 138",
-        "Certificate of Enrollment",
-        "Course Description",
-        "Good Moral Character",
-        "Honorable Dismissal",
+        'Transcript of Records',
+        'Diploma',
+        'Form 138',
+        'Certificate of Enrollment',
+        'Course Description',
+        'Good Moral Character',
+        'Honorable Dismissal',
       ],
       trim: true,
     },
@@ -26,12 +26,12 @@ const documentSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        "Employment",
-        "Further Studies / Graduate School",
-        "Transfer to another school",
-        "Visa / Immigration",
-        "Personal Use",
-        "Other",
+        'Employment',
+        'Further Studies / Graduate School',
+        'Transfer to another school',
+        'Visa / Immigration',
+        'Personal Use',
+        'Other',
       ],
     },
     customPurpose: {
@@ -50,26 +50,26 @@ const documentSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: [
-        "Pending",
-        "Payment Pending",
-        "Processing",
-        "Ready for Pickup",
-        "Completed",
-        "Cancelled",
-        "Rejected",
+        'Pending',
+        'Payment Pending',
+        'Processing',
+        'Ready for Pickup',
+        'Completed',
+        'Cancelled',
+        'Rejected',
       ],
-      default: "Pending",
+      default: 'Pending',
       index: true,
     },
     payments: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment",
+        ref: 'Payment',
       },
     ],
     appointment: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Appointment",
+      ref: 'Appointment',
       default: null,
     },
     notes: {
@@ -81,7 +81,7 @@ const documentSchema = new mongoose.Schema(
   { timestamps: true },
 )
 
-documentSchema.set("toJSON", {
+documentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -91,6 +91,6 @@ documentSchema.set("toJSON", {
 
 documentSchema.index({ user: 1, status: 1, createdAt: -1 })
 
-const Document = mongoose.model("Document", documentSchema)
+const Document = mongoose.model('Document', documentSchema)
 
 module.exports = Document

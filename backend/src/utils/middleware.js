@@ -1,6 +1,7 @@
 const User = require('../models/User')
 
 const userExtractor = async (req, res, next) => {
+  // get the authenticated user's id from Clerk
   const auth = req.auth()
   const clerkId = auth.userId
 
@@ -25,7 +26,14 @@ const errorHandler = async (error, req, res, next) => {
     return res.status(401).json({ error: 'Invalid or expired token' })
   }
 
-  res.status(500).json({error: 'Internal server error'})
+  res.status(500).json({ error: 'Internal server error' })
 }
 
-module.exports = { userExtractor, errorHandler }
+const adminValidator = async (req, res, next) => {
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Forbidden: Admins only' })
+  }
+  next()
+}
+
+module.exports = { userExtractor, errorHandler, adminValidator }

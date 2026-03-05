@@ -1,15 +1,15 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const paymentSchema = new mongoose.Schema(
   {
     request: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Document",
+      ref: 'Document',
       required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     amount: {
@@ -19,13 +19,13 @@ const paymentSchema = new mongoose.Schema(
     },
     method: {
       type: String,
-      enum: ["Paymongo", "Cash", "Bank Transfer", "Other"],
+      enum: ['Paymongo', 'Cash', 'Bank Transfer', 'Other'],
       required: true,
     },
     status: {
       type: String,
-      enum: ["Pending", "Paid", "Failed", "Refunded"],
-      default: "Pending",
+      enum: ['Pending', 'Paid', 'Failed', 'Refunded'],
+      default: 'Pending',
     },
     paymongoPaymentId: {
       type: String,
@@ -56,7 +56,7 @@ const paymentSchema = new mongoose.Schema(
   { timestamps: true },
 )
 
-paymentSchema.set("toJSON", {
+paymentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -68,6 +68,6 @@ paymentSchema.index({ user: 1, status: 1 })
 paymentSchema.index({ request: 1, createdAt: -1 })
 paymentSchema.index({ status: 1, createdAt: -1 })
 
-const Payment = mongoose.model("Payment", paymentSchema)
+const Payment = mongoose.model('Payment', paymentSchema)
 
 module.exports = Payment
