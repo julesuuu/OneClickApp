@@ -233,9 +233,11 @@ const Dashboard = () => {
             <CardContent className="pt-6">
               <h3 className="text-xl font-bold mb-2">Schedule Pickup</h3>
               <p className="text-teal-100 mb-4">Choose a convenient time to collect your ready documents.</p>
-              <Button variant="secondary" disabled>
-                <Calendar className="w-4 h-4 mr-2" />
-                View Appointments
+              <Button variant="secondary" asChild>
+                <Link to="/appointments">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  View Appointments
+                </Link>
               </Button>
             </CardContent>
           </Card>
