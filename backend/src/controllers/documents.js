@@ -3,6 +3,7 @@ const { request } = require('express')
 const Document = require('../models/Document')
 const User = require('../models/User')
 const { userExtractor } = require('../utils/middleware')
+
 documentsRouter.get('/', async (req, res) => {
   const documents = await Document.find({})
 
