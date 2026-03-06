@@ -9,6 +9,8 @@ import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+
 const Onboarding = () => {
   const navigate = useNavigate()
   const { getToken } = useAuth()
@@ -47,7 +49,7 @@ const Onboarding = () => {
         profileCompleted: true
       }
 
-      await axios.patch('http://localhost:3001/api/users/profile', finalData, {
+      await axios.patch(`${API_URL}/api/users/profile`, finalData, {
         headers: { Authorization: `Bearer ${token}` }
       })
 
