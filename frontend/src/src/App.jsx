@@ -12,14 +12,19 @@ import SettingsPage from './components/pages/SettingsPage'
 import Parent from './components/pages/onboarding/Parent'
 
 function App() {
-  const { isLoaded, isSignedIn } = useUser()
-  const { profile, loading, clearUser } = useUserSync()
+  const { isLoaded, isSignedIn, user } = useUser()
+  const { profile, loading, syncUser, clearUser } = useUserSync()
 
   useEffect(() => {
-    if (!isSignedIn) {
+    if (isSignedIn && user) {
+      syncUser({
+        email: user.primaryEmailAddress.emailAddress,
+        username: user.username || user.firstName,
+      })
+    } else if (!isSignedIn) {
       clearUser()
     }
-  }, [isSignedIn, clearUser])
+  }, [isSignedIn, user, syncUser, clearUser])
 
   if (!isLoaded || (isSignedIn && loading)) {
     return (
