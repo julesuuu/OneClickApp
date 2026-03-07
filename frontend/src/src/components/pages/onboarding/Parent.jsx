@@ -47,7 +47,7 @@ const Onboarding = () => {
         profileCompleted: true
       }
 
-      await axios.patch('/api/users/profile', finalData, {
+      await axios.patch(`${import.meta.env.VITE_API_URL || ''}/api/users/profile`, finalData, {
         headers: { Authorization: `Bearer ${token}` }
       })
 

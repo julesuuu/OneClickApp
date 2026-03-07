@@ -10,7 +10,7 @@ export const useUserSync = () => {
   const syncUserWithBackend = async ({ email, username }) => {
     const token = await window.Clerk.session.getToken()
     const response = await axios.post(
-      '/api/users/sync',
+      `${import.meta.env.VITE_API_URL || ''}/api/users/sync`,
       { email, username },
       { headers: { Authorization: `Bearer ${token}` } }
     )
