@@ -18,9 +18,9 @@ process.chdir(path.join(__dirname, 'backend', 'src'))
 
 const app = require('./app')
 
-app.use(express.static(path.join(__dirname, 'frontend/dist')))
+app.use(express.static(path.join(__dirname, 'frontend/src/dist')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'))
+  res.sendFile(path.join(__dirname, 'frontend/src/dist/index.html'))
 })
 
 module.exports = app

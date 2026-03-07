@@ -1,0 +1,11 @@
+{
+  "name": "oneclickapp",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd frontend/src && npm install && npm run build",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}
