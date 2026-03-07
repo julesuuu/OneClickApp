@@ -1,10 +1,10 @@
 const app = require('./app')
 const config = require('./utils/config')
 
-module.exports = app
+const PORT = process.env.PORT || config.PORT || 3001
 
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(config.PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${config.PORT}`)
-  })
-}
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`)
+})
+
+module.exports = app
