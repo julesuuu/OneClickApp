@@ -47,7 +47,7 @@ const Onboarding = () => {
         profileCompleted: true
       }
 
-      await axios.patch('http://localhost:3001/api/users/profile', finalData, {
+      await axios.patch('/api/users/profile', finalData, {
         headers: { Authorization: `Bearer ${token}` }
       })
 

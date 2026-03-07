@@ -10,7 +10,7 @@ export const useUserSync = () => {
   const syncUserWithBackend = async ({ email, username }) => {
     const token = await window.Clerk.session.getToken()
     const response = await axios.post(
-      'http://localhost:3001/api/users/sync',
+      '/api/users/sync',
       { email, username },
       { headers: { Authorization: `Bearer ${token}` } }
     )
