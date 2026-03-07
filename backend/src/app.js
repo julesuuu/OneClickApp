@@ -13,7 +13,16 @@ const app = express()
 
 connectDB()
 
-app.use(cors())
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3001',
+    'https://one-click-app.vercel.app',
+  ],
+  credentials: true,
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(clerkMiddleware())
 app.use("/api/users", usersRouter)
