@@ -14,11 +14,9 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3001',
-    'https://one-click-app.vercel.app',
-  ],
+  origin: function (origin, callback) {
+    callback(null, true)
+  },
   credentials: true,
 }
 
