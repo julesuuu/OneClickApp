@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "scripts": {
     "build": "cd frontend/src && npm install && npm run build",
+    "install:backend": "cd backend/src && npm install",
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.22.1"
+    "@clerk/express": "^1.7.69",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^4.22.1",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^9.2.0",
+    "zod": "^4.3.6"
   }
 }
