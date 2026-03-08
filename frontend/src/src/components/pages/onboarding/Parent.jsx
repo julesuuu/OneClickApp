@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '@clerk/clerk-react'
+import { useAuth, useUser } from '@clerk/clerk-react'
 import useField from '../../../hooks/useField'
 import { useUserSync } from '@/hooks/useUserSync'
 
@@ -12,6 +12,7 @@ import Step3 from './Step3'
 const Onboarding = () => {
   const navigate = useNavigate()
   const { getToken } = useAuth()
+  const { user: clerkUser } = useUser()
   const { profile, syncUser } = useUserSync()
   
   const [currentStep, setCurrentStep] = useState(1)
@@ -51,8 +52,11 @@ const Onboarding = () => {
         headers: { Authorization: `Bearer ${token}` }
       })
 
-      if (profile) {
-        syncUser({ email: profile.email, username: profile.username })
+      const email = clerkUser?.primaryEmailAddress?.emailAddress
+      const username = clerkUser?.username || clerkUser?.firstName
+      
+      if (email) {
+        syncUser({ email, username })
       }
       
       navigate('/dashboard')

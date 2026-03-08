@@ -1,18 +1,32 @@
 const User = require('../models/User')
 
 const userExtractor = async (req, res, next) => {
-  // get the authenticated user's id from Clerk
-  const auth = req.auth()
-  const clerkId = auth.userId
+  try {
+    const auth = req.auth()
+    
+    if (!auth) {
+      return res.status(401).json({ error: 'Unauthorized: No auth context' })
+    }
+    
+    const clerkId = auth.userId
 
-  if (!clerkId) {
-    return res.status(401).json({ error: 'Unauthorized: No session found' })
+    if (!clerkId) {
+      return res.status(401).json({ error: 'Unauthorized: No session found' })
+    }
+
+    const user = await User.findOne({ clerkId })
+    
+    if (!user) {
+      return res.status(401).json({ error: 'User not synced. Please complete onboarding first.' })
+    }
+    
+    req.user = user
+
+    next()
+  } catch (error) {
+    console.error('userExtractor error:', error)
+    res.status(500).json({ error: 'Authentication error' })
   }
-
-  const user = await User.findOne({ clerkId })
-  req.user = user
-
-  next()
 }
 
 const errorHandler = async (error, req, res, next) => {

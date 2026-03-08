@@ -21,70 +21,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useDocuments, DEMO_DOCUMENTS } from '@/hooks/useDocuments'
 
 const RequestsPage = () => {
   const { user } = useUser()
   const [filterStatus, setFilterStatus] = useState('all')
   const [filterPayment, setFilterPayment] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
+  const [useDemoData, setUseDemoData] = useState(false)
 
-  const [requests] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedRequests = localStorage.getItem(`requests_${user?.id}`)
-      if (savedRequests) {
-        return JSON.parse(savedRequests)
-      }
-      const demoRequests = [
-        {
-          id: '1',
-          type: 'Transcript of Records',
-          purpose: 'Employment',
-          copies: 1,
-          status: 'processing',
-          paymentStatus: 'paid',
-          paymentMethod: 'online',
-          date: '2026-02-15',
-          amount: 500,
-        },
-        {
-          id: '2',
-          type: 'Good Moral Character',
-          purpose: 'Transfer to another school',
-          copies: 1,
-          status: 'ready',
-          paymentStatus: 'paid',
-          paymentMethod: 'online',
-          date: '2026-02-10',
-          amount: 100,
-        },
-        {
-          id: '3',
-          type: 'Certificate of Enrollment',
-          purpose: 'Scholarship application',
-          copies: 2,
-          status: 'completed',
-          paymentStatus: 'paid',
-          paymentMethod: 'cash',
-          date: '2026-02-05',
-          amount: 200,
-        },
-        {
-          id: '4',
-          type: 'Diploma',
-          purpose: 'Job application abroad',
-          copies: 1,
-          status: 'pending',
-          paymentStatus: 'unpaid',
-          paymentMethod: 'cash',
-          date: '2026-02-18',
-          amount: 300,
-        },
-      ]
-      localStorage.setItem(`requests_${user?.id}`, JSON.stringify(demoRequests))
-      return demoRequests
-    }
-    return []
-  })
+  const { data: apiDocuments, isLoading, error } = useDocuments()
+
+  const requests = useDemoData || (error || !apiDocuments || !Array.isArray(apiDocuments) || !apiDocuments.length) ? DEMO_DOCUMENTS : apiDocuments
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -123,12 +71,17 @@ const RequestsPage = () => {
             <h1 className="text-3xl font-bold text-foreground mb-2">My Requests</h1>
             <p className="text-muted-foreground">Manage and track all your document requests</p>
           </div>
-          <Button variant="secondary" asChild>
-            <Link to="/new-request">
-              <Plus className="w-4 h-4 mr-2" />
-              New Request 
-            </Link>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => setUseDemoData(!useDemoData)}>
+              {useDemoData ? 'Using Demo Data' : 'Use Real API'}
+            </Button>
+            <Button variant="secondary" asChild>
+              <Link to="/new-request">
+                <Plus className="w-4 h-4 mr-2" />
+                New Request 
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Filters */}
@@ -200,7 +153,11 @@ const RequestsPage = () => {
         {/* Requests Table */}
         <Card>
           <CardContent className="p-0">
-            {filteredRequests.length === 0 ? (
+            {isLoading ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">Loading requests...</p>
+              </div>
+            ) : filteredRequests.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">No requests found</p>
                 <Button disabled>
