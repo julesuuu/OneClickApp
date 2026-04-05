@@ -28,7 +28,7 @@ function App() {
 
   if (!isLoaded || (isSignedIn && loading)) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-8 w-8 animate-spin text-foreground" />
           <p className="text-foreground">Verifying Student Profile...</p>
@@ -37,8 +37,8 @@ function App() {
     )
   }
 
-  const isProfileIncomplete = isSignedIn && profile && !profile.profileCompleted
-  const isProfileComplete = isSignedIn && profile && profile.profileCompleted
+  // const isProfileIncomplete = isSignedIn && profile && !profile.profileCompleted
+  // const isProfileComplete = isSignedIn && profile && profile.profileCompleted
 
   return (
     <div>
@@ -48,20 +48,20 @@ function App() {
 
       <SignedIn>
         <Routes>
-          <Route path="/profile-completion" element={isProfileComplete ? <Navigate to="/dashboard" replace /> : <Parent />} />
-          <Route path="/dashboard" element={isProfileIncomplete ? <Navigate to="/profile-completion" replace /> : <Dashboard />} />
+          {/* <Route path="/profile-completion" element={isProfileComplete ? <Navigate to="/dashboard" replace /> : <Parent />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<RequestsPage />} />
           <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/new-request" element={<NewRequestPage />} />
-          <Route 
+          {/* <Route 
             path="/" 
             element={
               isProfileIncomplete 
                 ? <Navigate to="/profile-completion" replace /> 
                 : <Navigate to="/dashboard" replace />
             } 
-          />
+          /> */}
         </Routes>
       </SignedIn>
     </div>
